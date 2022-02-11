@@ -32,20 +32,28 @@ public class Phonebook {
      * @param number belonging to the name.
      */
     public void addEntry(String name, String number) {
-        this.name = name;
-        this.number = number;
-        this.entry.add(this.number);
-        this.entry.addName(name);
-        this.map.put(this.name, this.entry);
+        if(this.map.containsKey(name)){
+            this.entry = (BookEntry) this.map.get(name);
+            this.entry.add(number);
+        } else {
+            this.name = name;
+            this.number = number;
+            this.entry.add(this.number);
+            this.map.put(this.name, this.entry);
+        }
     }
 
     public void addEntry(String name, String number, String address){
-        this.name = name;
-        this.number = number;
-        this.address = address;
-        this.entry.addName(name);
-        this.entry.add(this.number, this.address);
-        this.map.put(this.name, this.entry);
+        if(this.map.containsKey(name)){
+            this.entry = (BookEntry) this.map.get(name);
+            this.entry.add(number, address);
+        } else {
+            this.name = name;
+            this.number = number;
+            this.address = address;
+            this.entry.add(this.number, this.address);
+            this.map.put(this.name, this.entry);
+        }
     }
 
     /**
