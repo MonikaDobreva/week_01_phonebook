@@ -78,5 +78,4 @@ public class PhonebookTest {
         assertThat( phonebook.searchAddress(name) )
                 .isNull();
     }
-    
 }

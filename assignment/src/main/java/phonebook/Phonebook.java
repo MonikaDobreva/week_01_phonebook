@@ -1,6 +1,5 @@
 package phonebook;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +23,6 @@ public class Phonebook {
     public Phonebook() {
         this.entry = new BookEntry();
         this.map = new HashMap<String, BookEntry>();
-        
     }
 
     /**
@@ -102,6 +100,5 @@ public class Phonebook {
      */
     public void deleteEntry(String name) {
         this.map.remove(name);
-
     }
 }

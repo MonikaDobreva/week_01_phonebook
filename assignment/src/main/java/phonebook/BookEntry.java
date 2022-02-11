@@ -1,7 +1,5 @@
 package phonebook;
 
-
-
 /**
  * 
  * @author urs
@@ -37,5 +35,4 @@ public class BookEntry {
     public String getAddress(){
         return this.address;
     }
-    
 }
