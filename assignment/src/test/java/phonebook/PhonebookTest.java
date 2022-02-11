@@ -28,6 +28,23 @@ public class PhonebookTest {
     }
 
     @Test
+    void phonebookSearchByNumber() {
+        String number = "040-123456";
+        phonebook.addEntry("Pekka","040-123456");
+        assertThat(this.phonebook.searchByNumber(number))
+                .as("Search by number should return person's name")
+                .contains("Pekka");
+    }
+
+    @Test
+    void phonebookSearchByNumberNotFound() {
+        String number = "02-444123";
+        phonebook.addEntry("Pekka","040-123456");
+        assertThat(this.phonebook.searchByNumber(number)).as("Search for number not present should return null")
+                .isNull();
+    }
+
+    @Test
     public void phonebookSearchAddress(){
         phonebook.addEntry( "Pekka", "040-123456" );
         phonebook.addAddress( "Pekka", "Hulsterweg 6, Venlo" );
@@ -44,6 +61,22 @@ public class PhonebookTest {
                 .contains( "Hulsterweg 6" ,"Venlo", "040-123456" );
     }
 
+    @Test
+    public void phonebookDeletesEntry() {
+        String name = "Pekka";
+        String number = "040-123456";
 
+        this.phonebook.addEntry(name, number);
+        this.phonebook.deleteEntry("Pekka");
+        assertThat(this.phonebook.searchByName(name)).isNull();
+    }
+
+    @Test
+    public void phonebookSearchAddressNotFound(){
+        phonebook.addEntry( "Pekka", "040-123456", "Hulsterweg 6, Venlo");
+        String name = "Jill";
+        assertThat( phonebook.searchAddress(name) )
+                .isNull();
+    }
     
 }

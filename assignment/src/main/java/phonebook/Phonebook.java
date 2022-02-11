@@ -1,7 +1,9 @@
 package phonebook;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,6 +37,7 @@ public class Phonebook {
         this.name = name;
         this.number = number;
         this.entry.add(this.number);
+        this.entry.addName(name);
         this.map.put(this.name, this.entry);
     }
 
@@ -42,6 +45,7 @@ public class Phonebook {
         this.name = name;
         this.number = number;
         this.address = address;
+        this.entry.addName(name);
         this.entry.add(this.number, this.address);
         this.map.put(this.name, this.entry);
     }
