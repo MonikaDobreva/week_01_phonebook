@@ -1,9 +1,10 @@
 package phonebook;
 
-import static org.assertj.core.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import phonebook.BookEntry;
+
+import java.util.ArrayList;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author urs
@@ -75,7 +76,18 @@ public class PhonebookTest {
     public void phonebookSearchAddressNotFound(){
         phonebook.addEntry( "Pekka", "040-123456", "Hulsterweg 6, Venlo");
         String name = "Jill";
-        assertThat( phonebook.searchAddress(name) )
+        assertThat(phonebook.searchAddress(name) )
                 .isNull();
+    }
+
+    @Test
+    public void addAnotherNumber(){
+        phonebook.addEntry("Pek", "040-123456");
+        phonebook.addEntry("Pek", "040-123457");
+        ArrayList<String> list = new ArrayList<>();
+        list.add("040-123456");
+        list.add("040-123457");
+        assertThat(phonebook.searchByName("Pek"))
+                .isEqualTo(list + ", " + phonebook.address);
     }
 }

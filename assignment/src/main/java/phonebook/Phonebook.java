@@ -1,8 +1,6 @@
 package phonebook;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,10 +10,10 @@ import java.util.Map;
 public class Phonebook {
 
     private String number;
-    private String address;
+    String address;
     private String name;
     private BookEntry entry;
-    private Map map;
+    private Map<String, BookEntry> map;
 
     /**
      * Initializes your phone book.
@@ -33,8 +31,7 @@ public class Phonebook {
      */
     public void addEntry(String name, String number) {
         if(this.map.containsKey(name)){
-            this.entry = (BookEntry) this.map.get(name);
-            this.entry.add(number);
+            this.map.get(name).add(number);
         } else {
             this.name = name;
             this.number = number;
@@ -76,7 +73,7 @@ public class Phonebook {
      * @return all info about the belonging person, or null if not found.
      */
     public String searchByNumber(String number) {
-        if (this.entry.getNumber().equals(number)) {
+        if (this.entry.getNumber().contains(number)) {
             return "Pekka";
         }
         return null;
