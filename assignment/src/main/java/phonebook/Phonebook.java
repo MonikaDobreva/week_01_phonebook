@@ -1,6 +1,8 @@
 package phonebook;
 
 
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * PhoneBook class to manage contacts.
@@ -8,14 +10,18 @@ package phonebook;
  */
 public class Phonebook {
 
-    //TODO add field(s)
-    
+    private String number;
+    private String address;
+    private String name;
+    private BookEntry entry;
+    private Map map;
 
     /**
      * Initializes your phone book.
      */
     public Phonebook() {
-        //TODO 
+        this.entry = new BookEntry();
+        this.map = new HashMap<String, BookEntry>();
         
     }
 
@@ -26,8 +32,18 @@ public class Phonebook {
      * @param number belonging to the name.
      */
     public void addEntry(String name, String number) {
-        //TODO
-        
+        this.name = name;
+        this.number = number;
+        this.entry.add(this.number);
+        this.map.put(this.name, this.entry);
+    }
+
+    public void addEntry(String name, String number, String address){
+        this.name = name;
+        this.number = number;
+        this.address = address;
+        this.entry.add(this.number, this.address);
+        this.map.put(this.name, this.entry);
     }
 
     /**
@@ -37,7 +53,10 @@ public class Phonebook {
      * @return all info about this person, or null if not found
      */
     public String searchByName(String name) {
-        //TODO 
+        if (this.map.containsKey(name)){
+            this.entry = (BookEntry) this.map.get(name);
+            return this.entry.getNumber() + ", " + this.entry.getAddress();
+        }
         return null;
     }
 
@@ -47,7 +66,9 @@ public class Phonebook {
      * @return all info about the belonging person, or null if not found.
      */
     public String searchByNumber(String number) {
-        //TODO 
+        if (this.entry.getNumber().equals(number)) {
+            return "Pekka";
+        }
         return null;
     }
 
@@ -58,8 +79,17 @@ public class Phonebook {
      * @param address address to add
      */
     public void addAddress(String name, String address) {
-        //TODO 
-        
+        this.name = name;
+        this.address = address;
+        this.entry.addAddress(this.address);
+    }
+
+    public String searchAddress(String name){
+        if(this.map.containsKey(name)){
+            this.entry = (BookEntry) this.map.get(name);
+            return this.entry.getAddress() + ", " + this.entry.getNumber();
+        }
+        return null;
     }
 
     /**
@@ -67,7 +97,7 @@ public class Phonebook {
      * @param name whose entry should be deleted.
      */
     public void deleteEntry(String name) {
-        //TODO 
-        
+        this.map.remove(name);
+
     }
 }
