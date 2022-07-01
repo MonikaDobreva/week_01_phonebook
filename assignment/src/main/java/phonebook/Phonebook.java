@@ -73,8 +73,10 @@ public class Phonebook {
      * @return all info about the belonging person, or null if not found.
      */
     public String searchByNumber(String number) {
-        if (this.entry.getNumber().contains(number)) {
-            return "Pekka";
+        for(Map.Entry<String, BookEntry> entr : map.entrySet()){
+            if(entr.getValue().getNumber().contains(number)){
+                return entr.getKey();
+            }
         }
         return null;
     }
